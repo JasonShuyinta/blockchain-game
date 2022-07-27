@@ -1,4 +1,4 @@
-###Blockchain Game
+### Blockchain Game
 
 # Polygon Blockchain
 
@@ -95,3 +95,9 @@ From Metamask, select LINK -> Send and send it to the contract address.
 
 Documentation
 [Polygon] (https://docs.polygon.technology/docs/develop/alchemy)
+
+Authors:
+
+Jason Shuyinta
+Keran Jegasothy
+Qazim Mucodema

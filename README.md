@@ -1,6 +1,6 @@
-### Blockchain Game
+# Blockchain Game
 
-# Polygon Blockchain
+## Polygon Blockchain
 
 In order to launch the game, follow these instructions. Please feel free to reach out if any help is needed.
 

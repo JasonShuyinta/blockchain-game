@@ -1,14 +1,18 @@
+###Blockchain Game
+
 # Polygon Blockchain
 
-Per prima cosa installare tutte le dipendenza dalla root directory:
+In order to launch the game, follow these instructions. Please feel free to reach out if any help is needed.
+
+First of all install all the dependencies from the root directory:
 
 ```bash
 npm install
 ```
 
-Lancia Ganache e importa un account su Metamask
+Launch Ganache and import an account on Metamask
 
-Su Metamask, aggiungere la TestNet polygon con i seguenti dati:
+On Metamask, add the Polygon TestNet with the following data:
 
 1. Network Name: Polygon Mumbai Testnet
 2. New RPC URL: https://polygon-mumbai.g.alchemy.com/v2/your-api-key
@@ -16,60 +20,59 @@ Su Metamask, aggiungere la TestNet polygon con i seguenti dati:
 4. Symbol: MATIC
 5. Block Explorer URL: https://mumbai.polygonscan.com/
 
-Scegli questo nuovo network all'account che hai aggiunto tramite ganache e aggiungi dei MATIC test
-da questo link: [FAUCET MATIC] (https://faucet.polygon.technology/)
-Scegli:
+Choose this new network from the account you just added through Ganache and add some MATIC.
+from this link: [FAUCET MATIC] (https://faucet.polygon.technology/)
+Select:
 
 - Network: Mumbai
 - Token: MATIC
-- Wallet Address: Quello dell'account appena aggiunto tramite ganache
+- Wallet Address: The one of the account you just added through Ganache.
 
-Attendi che vengano aggiunti 0.5 oppure 1 MATIC.
+Wait until 0.5/1 Matic are added to your wallet.
 
-A questo punto aggiungi i LINK da sito : [FAUCET LINK] (https://faucets.chain.link/)
-Scegli:
+At this moment, add LINKs from the following website: [FAUCET LINK] (https://faucets.chain.link/)
+Choose:
 
 - Network: Polygon Mumbai
-- TestNet Account address: Quello dell'account appena aggiunto tramite ganache
+- TestNet Account address:  The one of the account you just added through Ganache.
 
-Attendi che vengano aggiunti 20 LINK circa.
+Wait until ~20 LINK are added to your wallet.
 
-Dovresti avere a questo punto su Metamask, l'address aggiunto da ganache su network Polygon Mumbai Testnet con circa 1 MATIC e circa 20 LINK.
+You should have at this point on Metamask the account you added from Ganache on the Polygon Mumbai Testnet with ~1 Matic and ~20 LINK.
 
-A questo punto aggiungi un file chiamato ".env" nella root directory.
-Al suo interno avra':
+Now add a file named ".env" to the root directory.
+Inside of it there will be:
 
 ```
-API_URL = "https://polygon-mumbai.g.alchemy.com/v2/ueiDC0MI9PcxtoS225GicDCFhFN3i7_Q"
-PRIVATE_KEY = "0xff50d56ac8d990c454eaee263c4dc3a34339e4be03204d23ecec40c514fcce6b"
+API_URL = "https://polygon-mumbai.g.alchemy.com/v2/ueixxxxxxxxxxxxxxxxxxxxi7_Q"
+PRIVATE_KEY = "0xff50d56ac8d9xxxxxxxxxxxxxxxxxxxxxxxec40c514fcce6b"
 ```
 
-Al posto della Private Key metti la private key fornita da Ganache per quell'address.
-API_URL dovrebbe andare bene cosi (Sarebbe l'url della DAPP creata su Alchemy, dovrebbe andare bene per entrambi, senza bisogno che facciamo un account per ogni owner).
+Instead of the PRIVATE_KEY insert the private key provided by Ganache for that address.
+API_URL is the URL of the DAPP created on Alchemy.
 [Alchemy] (https://dashboard.alchemyapi.io/).
 
-Compila i contratti tramite [Hardhat] (https://hardhat.org/) e non piu' truffle.
-sempre da root directory:
+Compile the contracts with HardHat [Hardhat] (https://hardhat.org/).
+From the root directory:
 
 ```bash
 npx hardhat compile
 ```
+It should create a folder "artifacts" that corresponds to the "build" folder if you are using Truffle instead of HardHat.
 
-Dovrebbe crearti una cartella "artifacts" che corrisponde a quella "build" di truffle.
-
-Una volta fatto questo dai questo comando sempre da root directory per deployare i contratti sulla Polygon Testnet:
+Once done this, give the following command from the root directory to deploy contracts on the Polygon TestNet:
 
 ```bash
 npx hardhat run deploy.js --network polygon_mumbai
 ```
 
-La console dovrebbe rispondere con qualcosa tipo
+The console should answer with something along the lines of:
 
 ```bash
 Contract deployed to address: 0x29A2505a6bD892B0604789c456a073bcE4Ea7fb0
 ```
 
-Copia questo address e incollalo nel file DataContext.js a riga 57 circa:
+This address will automatically be inserted on the client side of the app at the file DataContext.js
 
 ```javascript
 mainContract = new web3.eth.Contract(
@@ -78,21 +81,17 @@ mainContract = new web3.eth.Contract(
 );
 ```
 
-Fatto questo puoi lanciare il client con
+After this you can launch the client with 
 
 ```bash
 npm run start
 ```
+If everything has gone well you can visit the site on PolyScan [Polyscan] (https://mumbai.polygonscan.com/),
+copy the address of the contract and visualize all the transacions to and from the blockchain and debug from here.
+The first transactions must be "Contract Creation".
 
-Se tutto e' andato bene puoi visitare il sito [Polyscan] (https://mumbai.polygonscan.com/),
-incollare l'address del contract e visualizzare tutte le transazioni da e verso la blockchain
-e debuggare da qua.
-Come prima transazione ci deve essere "Contract Creation".
+For the game to work correctly, you must be able to use the Random function, and to do so you must send LINK tokens to the contract address.l
+From Metamask, select LINK -> Send and send it to the contract address. 
 
-N.B. Per far funzionare il random bisogna mandare LINK token al contract address.
-Per cui da Metamask, seleziona LINK, fai Send e mandali all'address del Contract.
-Chiamare Chainlink su Polygon costa 0.0001 LINK invece che i 0.1 LINK di Kovan, per cui basta
-mandarne > 0.0001 LINK.
-
-Documentazione:
+Documentation
 [Polygon] (https://docs.polygon.technology/docs/develop/alchemy)
